@@ -19,7 +19,11 @@ final class RMService {
     /// - Parameters:
     ///   - request: Объект запроса, содержащий информацию о запросе.
     ///   - completion: Замыкание, которое вызывается после завершения выполнения запроса.
-    public func execute(_ request: RMRequest, completion: @escaping () -> Void) {
+    ///   - type: Тип ожидаемого ответа, который должен соответствовать протоколу `Codable`.
+    public func execute
+    <T: Codable>(_ request: RMRequest,
+                 expecting type: T.Type,
+                 completion: @escaping (Result <T, Error>) -> Void) {
         // Логика выполнения запроса
         
     }
