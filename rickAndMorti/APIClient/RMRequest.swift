@@ -60,11 +60,15 @@ final class RMRequest {
     public let httpMethod = "GET"
     
     public init(endpoint: RMEndPoint,
-                pathComponents: [String],
-                queryParameters: [URLQueryItem])
+                pathComponents: [String] = [],
+                queryParameters: [URLQueryItem] = [])
     {
         self.endpoint = endpoint
         self.pathComponents = pathComponents
         self.queryParameters = queryParameters
     }
+}
+
+extension RMRequest {
+    static let listCharacterResult = RMRequest(endpoint: .character)
 }
