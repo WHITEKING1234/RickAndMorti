@@ -7,20 +7,28 @@
 
 import UIKit
 
-final class RMCharactersViewController: UIViewController {
-
+final class RMCharactersViewController: BaseViewController {
+    
+    private let characterView = CharacterView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Characters"
-        
-        RMService.shared.execute(.listCharacterResult, expecting: RMGetAllCharactersResponse.self) { result in
-            switch result {
-            case .success(let model):
-                print(String(describing: model))
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
+    }
+    
+    override func addSubviews() {
+        super.addSubviews()
+        view.addSubviews(characterView)
+    }
+    
+    override func setupConstrant() {
+        super.setupConstrant()
+        NSLayoutConstraint.activate([
+            characterView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            characterView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            characterView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            characterView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }
